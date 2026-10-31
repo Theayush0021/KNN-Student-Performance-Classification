@@ -123,3 +123,38 @@ test_accuracy <- mean(final_pred == y_test) * 100
 
 print(paste("Final Test Accuracy:",
             round(test_accuracy, 2), "%"))
+
+
+# Save K value comparison
+write.csv(
+  comparison,
+  "KNN_Model_Comparison.csv",
+  row.names = FALSE
+)
+
+# Save confusion matrix
+
+
+conf_matrix <- table(
+  Actual = y_test,
+  Predicted = final_pred
+)
+
+write.csv(
+  as.data.frame.matrix(conf_matrix),
+  "KNN_Confusion_Matrix.csv"
+)
+
+# Save final accuracy and best K
+
+
+results_summary <- data.frame(
+  Best_K = best_k,
+  Test_Accuracy = round(test_accuracy, 2)
+)
+
+write.csv(
+  results_summary,
+  "KNN_Final_Results.csv",
+  row.names = FALSE
+)
